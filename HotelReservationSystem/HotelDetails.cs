@@ -6,12 +6,14 @@ namespace HotelReservationSystem
 {
     public class HotelDetails
     {
-        readonly string hotel;
-        readonly int regularRate;
-        public HotelDetails(string hotel, int regularRate)
+        public string hotel;
+        public int regularWeekdayRate;
+        public int regularWeekendRate;
+        public HotelDetails(string hotel, int regularWeekdayRate,int regularWeekendRate)
         {
             this.hotel = hotel;
-            this.regularRate = regularRate;
+            this.regularWeekdayRate = regularWeekdayRate;
+            this.regularWeekendRate = regularWeekendRate;
         }
     }
 }
