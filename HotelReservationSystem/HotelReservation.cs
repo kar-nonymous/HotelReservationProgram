@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace HotelReservationSystem
@@ -20,6 +21,73 @@ namespace HotelReservationSystem
         { 
             HotelDetails hotelDetails = new HotelDetails(hotel, regularRate);
             miamiHotels.Add(hotel, hotelDetails);
+        }
+        readonly int[] months = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+        /// <summary>
+        /// Method to count the leap years
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public int CountLeapYears(Date date)
+        {
+            int year = date.year;
+            if (date.month <= 2)
+                year--;
+            return year / 4 - year / 100 + year / 400;
+        }
+        /// <summary>
+        /// Method to get the number of days between 2 dates
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        /// <returns></returns>
+        public int NoOfDays(Date startDate, Date endDate)
+        {
+            int n1 = startDate.year * 365 + startDate.day;
+            for (int i = 0; i < startDate.month - 1; i++)
+            {
+                n1 += months[i];
+            }
+            n1 += CountLeapYears(startDate);
+            int n2 = endDate.year * 365 + endDate.day;
+            for (int i = 0; i < endDate.month - 1; i++)
+            {
+                n2 += months[i];
+            }
+            n2 += CountLeapYears(endDate);
+            return n2 - n1;
+        }
+        /// <summary>
+        /// Class to get the date
+        /// </summary>
+        public class Date
+        {
+            public int day;
+            public int month;
+            public int year;
+            public Date(int day, int month, int year)
+            {
+                this.day = day;
+                this.month = month;
+                this.year = year;
+            }
+        }
+        /// <summary>
+        /// UC 2:
+        /// Returns the cheapest hotel
+        /// </summary>
+        public void CheapestHotel()
+        {
+            Date startDate = new Date(14, 10, 2020);
+            Date endDate = new Date(20, 10, 2020);
+            Dictionary<string, int> rateList = new Dictionary<string, int>();
+            foreach (var value in miamiHotels)
+            {
+                int rate = value.Value.regularRate * NoOfDays(startDate, endDate);
+                rateList.Add(value.Value.hotel, rate);
+            }
+            var keyValuePair = rateList.OrderBy(keyValuePair => keyValuePair.Value).First();
+            Console.WriteLine("Cheapest Hotel: {0} and Rate: {1}", keyValuePair.Key, keyValuePair.Value);
         }
     }
 }

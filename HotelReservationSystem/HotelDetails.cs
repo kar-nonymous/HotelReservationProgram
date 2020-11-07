@@ -6,8 +6,8 @@ namespace HotelReservationSystem
 {
     public class HotelDetails
     {
-        readonly string hotel;
-        readonly int regularRate;
+        public string hotel;
+        public int regularRate;
         public HotelDetails(string hotel, int regularRate)
         {
             this.hotel = hotel;
