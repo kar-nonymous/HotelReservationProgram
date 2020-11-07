@@ -17,9 +17,9 @@ namespace HotelReservationSystem
         /// </summary>
         /// <param name="hotel"></param>
         /// <param name="regularRate"></param>
-        public void AddHotel(string hotel, int regularRate)
-        { 
-            HotelDetails hotelDetails = new HotelDetails(hotel, regularRate);
+        public void AddHotel(string hotel, int regularWeekdayRate, int regularWeekendRate)
+        {
+            HotelDetails hotelDetails = new HotelDetails(hotel, regularWeekdayRate, regularWeekendRate);
             miamiHotels.Add(hotel, hotelDetails);
         }
         readonly int[] months = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
@@ -83,7 +83,7 @@ namespace HotelReservationSystem
             Dictionary<string, int> rateList = new Dictionary<string, int>();
             foreach (var value in miamiHotels)
             {
-                int rate = value.Value.regularRate * NoOfDays(startDate, endDate);
+                int rate = value.Value.regularWeekdayRate * NoOfDays(startDate, endDate);
                 rateList.Add(value.Value.hotel, rate);
             }
             var keyValuePair = rateList.OrderBy(keyValuePair => keyValuePair.Value).First();
