@@ -12,9 +12,9 @@ namespace HotelReservationSystem
             /// Object of the HotelReservation class
             HotelReservation hotelReservation = new HotelReservation();
             /// Adding hotel's name and rate 
-            hotelReservation.AddHotel("Lakewood", 110);
-            hotelReservation.AddHotel("Bridgewood", 160);
-            hotelReservation.AddHotel("Ridgewood", 220);
+            hotelReservation.AddHotel("Lakewood", 110, 90);
+            hotelReservation.AddHotel("Bridgewood", 150, 50);
+            hotelReservation.AddHotel("Ridgewood", 220, 150);
             /// Cheapest hotel
             hotelReservation.CheapestHotel();
         }
