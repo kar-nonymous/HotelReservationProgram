@@ -8,7 +8,7 @@ namespace HotelReservationSystem
     public class HotelReservation
     {
         /// <summary>
-        /// Dictionary to contain the hotel name and rate
+        /// Dictionary to contain the hotel name and rate.
         /// </summary>
         public static Dictionary<string, HotelDetails> miamiHotels = new Dictionary<string, HotelDetails>();
         /// <summary>
@@ -88,6 +88,31 @@ namespace HotelReservationSystem
             }
             var keyValuePair = rateList.OrderBy(keyValuePair => keyValuePair.Value).First();
             Console.WriteLine("Cheapest Hotel: {0} and Rate: {1}", keyValuePair.Key, keyValuePair.Value);
+        }
+        /// <summary>
+        /// UC 4:
+        /// Returns the cheapest hotel with weekend price included
+        /// </summary>
+        /// <param name="startDate"></param>
+        /// <param name="endDate"></param>
+        public void CheapestHotelWithWeekendRate(DateTime startDate, DateTime endDate)
+        {
+            int finalRate = 0;
+            Dictionary<string, int> weekendRateList = new Dictionary<string, int>();
+            foreach(var value in miamiHotels)
+            {
+                while (startDate != endDate.AddDays(1))
+                {
+                    if (startDate.DayOfWeek == DayOfWeek.Saturday || startDate.DayOfWeek == DayOfWeek.Sunday)
+                        finalRate += value.Value.regularWeekendRate;
+                    else
+                        finalRate += value.Value.regularWeekdayRate;
+                    weekendRateList.Add(value.Value.hotel, finalRate);
+                    startDate = startDate.AddDays(1);
+                }
+            }
+            var keyValuePair = weekendRateList.OrderBy(keyValuePair => keyValuePair.Value).First();
+            Console.WriteLine("Cheapest hotel: {0} and Rate: {1}", keyValuePair.Key, keyValuePair.Value);
         }
     }
 }
