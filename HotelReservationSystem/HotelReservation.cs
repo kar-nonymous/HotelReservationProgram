@@ -17,9 +17,9 @@ namespace HotelReservationSystem
         /// </summary>
         /// <param name="hotel"></param>
         /// <param name="regularRate"></param>
-        public void AddHotel(string hotel, int regularWeekdayRate, int regularWeekendRate)
+        public void AddHotel(string hotel, int regularWeekdayRate, int regularWeekendRate,int rating)
         {
-            HotelDetails hotelDetails = new HotelDetails(hotel, regularWeekdayRate, regularWeekendRate);
+            HotelDetails hotelDetails = new HotelDetails(hotel, regularWeekdayRate, regularWeekendRate, rating);
             miamiHotels.Add(hotel, hotelDetails);
         }
         readonly int[] months = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
